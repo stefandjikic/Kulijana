@@ -9,6 +9,8 @@ import BigArticleCard from "@/components/article/BigArticleCard";
 import ArticleCard from "@/components/article/ArticleCard";
 import TopicsFourColumnGrid from "@/components/home/TopicsFourColumnGrid";
 import InfoComponent from "@/components/utils/InfoComponent";
+import { Box, Grid, Heading } from "@chakra-ui/react";
+import TextArticle from "@/components/article/TextArticle";
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -86,6 +88,59 @@ export default function Home() {
         />
       </TopicsFourColumnGrid>
       <InfoComponent />
+      <TopicsTwoColumnGrid title="ZANIMLJIVOSTI">
+        <Box>
+          <BigArticleCard
+            isTransparent
+            minHeight="400px"
+            category="Istorija"
+            title="Naslov članka istorija"
+            description="Kratak opis teksta. Verovatno ne duže od 100 karaktera."
+          />
+          <Grid
+            gridTemplateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+            gap="4"
+            mt="2"
+          >
+            <TextArticle
+              title="Nalov prvi"
+              borderBottom="1px"
+              borderRight="1px"
+            />
+            <TextArticle
+              title="Nalov drugi"
+              borderBottom="1px"
+              borderRight="1px"
+            />
+            <TextArticle
+              title="Nalov treći"
+              borderBottom="1px"
+              borderRight="1px"
+            />
+            <TextArticle
+              title="Nalov članka prvi"
+              borderBottom="1px"
+              borderRight="1px"
+            />
+            <TextArticle
+              title="Nalov članka drugi"
+              borderBottom="1px"
+              borderRight="1px"
+            />
+            <TextArticle
+              title="Nalov članka treći"
+              borderBottom="1px"
+              borderRight="1px"
+            />
+          </Grid>
+        </Box>
+        <ArticleCard
+          isTransparent
+          minHeight="400px"
+          title="Neka Zanimljivost"
+          description="Nešto jako zanimljivo. Hmmm, jeste stvarno!"
+        />
+      </TopicsTwoColumnGrid>
     </Layout>
   );
 }

@@ -21,7 +21,7 @@ const Layout = ({ children, title = "" }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainNavigation />
-      <Container maxW="1200px">
+      <Container maxW="1280px">
         <main style={{ minHeight: "80vh" }}>{children}</main>
       </Container>
 

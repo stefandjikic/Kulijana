@@ -9,15 +9,18 @@ import {
   DrawerOverlay,
   Flex,
   Switch,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import Logo from "./Logo";
 
 const SideMenu = ({ isOpen, onClose, toggleColorMode, colorMode }) => {
+  const menuColor = useColorModeValue("#fff7ef", "gray.700");
+
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
-      <DrawerContent>
+      <DrawerContent bg={menuColor}>
         <DrawerCloseButton mt="2" />
         <DrawerHeader borderBottom="1px" borderColor="blackAlpha.300">
           <Logo size="25px" />

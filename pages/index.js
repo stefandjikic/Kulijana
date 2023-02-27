@@ -1,15 +1,91 @@
-import Head from 'next/head'
+import Head from "next/head";
 // import Image from 'next/image'
 // import { Inter } from 'next/font/google'
-import Layout from '@/components/layout/Layout'
-import { Heading } from '@chakra-ui/react'
+import Layout from "@/components/layout/Layout";
+import HomeHeroSection from "@/components/home/HomeHeroSection";
+import HighlightedSection from "@/components/home/HighlightedSection";
+import TopicsTwoColumnGrid from "@/components/home/TopicsTwoColumnGrid";
+import BigArticleCard from "@/components/article/BigArticleCard";
+import ArticleCard from "@/components/article/ArticleCard";
+import TopicsFourColumnGrid from "@/components/home/TopicsFourColumnGrid";
+import InfoComponent from "@/components/utils/InfoComponent";
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-  <Layout>
-    <Heading>Početna</Heading>
-  </Layout>
-  )
+    <Layout>
+      <HomeHeroSection />
+      <HighlightedSection />
+      <TopicsTwoColumnGrid title="NAUKA I TEHNOLOGIJA">
+        <BigArticleCard
+          minHeight="400px"
+          isTransparent
+          category="Tehnologija"
+          title="Naslov članka bla bla bla"
+          description="Kratak opis teksta. Verovatno ne duže od 100 karaktera."
+        />
+        <ArticleCard
+          minHeight="400px"
+          isTransparent
+          title="Šta su to RNK vakcine?"
+        />
+      </TopicsTwoColumnGrid>
+      <TopicsFourColumnGrid title="IT">
+        <ArticleCard hasColor category="Softver" title="Novi softer naslov" />
+        <ArticleCard
+          hasColor
+          category="Uređaji"
+          title="Novi telefon naslov"
+          description="Po prvi put, korisnici širom sveta mogu isprobati prepoznatljive Leica kamere na Xiaomi 13, Xiaomi 13 Pro i Xiaomi 13 Lite modelima "
+        />
+        <ArticleCard
+          hasColor
+          category="Internet"
+          title="Nokia dobila novi logo"
+          description="Nokia logo je dobio svoj novi izgled, a po prvi put u skoro 60 godina ova kompanija, nekadašnji gigant industrije telefona menja svoj vizuelni identitet. "
+        />
+        <ArticleCard hasColor />
+      </TopicsFourColumnGrid>
+      <TopicsTwoColumnGrid title="BIZ">
+        <BigArticleCard
+          minHeight="400px"
+          category="Biznis"
+          title="Naslov članka biz biz"
+          description="Kratak opis teksta. Verovatno ne duže od 100 karaktera."
+        />
+        <ArticleCard
+          minHeight="400px"
+          title="Šta se dešava u Twitteru?"
+          description="Ilon Mask nešto piše kao po običaju. Smrtnici se lože."
+        />
+      </TopicsTwoColumnGrid>
+      <TopicsFourColumnGrid title="KULTURA">
+        <ArticleCard
+          isTransparent
+          category="FILM"
+          title="Novi film Darena Aronofskija"
+          description="U gradu u Ajdahu, Čarli, povučeni i nezdrav profesor engleskog, krije se u svom stanu i projeda put do smrti."
+        />
+        <ArticleCard
+          isTransparent
+          category="MUZIKA"
+          title="Rammsetein i 'ZEIT' "
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque perspiciatis corrupti ducimus? Rerum cupiditate incidunt nesciunt exercitationem consequatur nam quod amet fugit!"
+        />
+        <ArticleCard
+          isTransparent
+          category="UMETNOST"
+          title="Svetska čuda"
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque perspiciatis corrupti ducimus? "
+        />
+        <ArticleCard
+          isTransparent
+          title="Lorem ipsum dolor sit amet"
+          category="KNJIŽEVNOST"
+        />
+      </TopicsFourColumnGrid>
+      <InfoComponent />
+    </Layout>
+  );
 }

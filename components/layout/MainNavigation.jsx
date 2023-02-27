@@ -21,7 +21,7 @@ const MainNavigation = () => {
     onClose: onSideMenuClose,
   } = useDisclosure();
   const sideMenuButtonRef = React.useRef();
-  const accentColor = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
+  const outlineColor = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
 
   return (
     <Box as="nav" mb="5">
@@ -48,9 +48,9 @@ const MainNavigation = () => {
           colorMode={colorMode}
         />
       </Container>
-      <Box borderY="1px solid" borderColor={accentColor}>
+      <Box borderY="1px solid" borderColor={outlineColor}>
         <Container maxW="1200px">
-          <Flex justifyContent="center">
+          <Flex justifyContent={{base: 'flex-start', md: 'center'}} overflowX={{base: 'auto', md: 'unset'}}>
             {MAIN_NAV.map((nav) => (
               <NavItem key={nav.id} nav={nav} />
             ))}

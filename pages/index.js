@@ -11,6 +11,7 @@ import TopicsFourColumnGrid from "@/components/home/TopicsFourColumnGrid";
 import InfoComponent from "@/components/utils/InfoComponent";
 import { Box, Grid, Heading } from "@chakra-ui/react";
 import TextArticle from "@/components/article/TextArticle";
+import GridSectionWithTitle from "@/components/utils/GridSectionWithTitle";
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -141,6 +142,20 @@ export default function Home() {
           description="Nešto jako zanimljivo. Hmmm, jeste stvarno!"
         />
       </TopicsTwoColumnGrid>
+      <GridSectionWithTitle title="ZABAVA" columnLg="2">
+        <ArticleCard
+          category="Lifestyle"
+          title="Neki naslov iz lifestyle teme"
+          largeImage
+          minHeight="400px"
+        />
+        <ArticleCard
+          category="Zabava"
+          title="Neki naslov iz zabava teme"
+          largeImage
+          minHeight="400px"
+        />
+      </GridSectionWithTitle>
     </Layout>
   );
 }

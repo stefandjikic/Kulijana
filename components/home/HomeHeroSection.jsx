@@ -3,6 +3,7 @@ import React from "react";
 import HeadlineImageArticleCard from "../article/HeadlineImageArticleCard";
 import HeadlineTextArticleCard from "../article/HeadlineTextArticleCard";
 import TextArticle from "../article/TextArticle";
+import SelectedArticlesSection from "./SelectedArticlesSection";
 
 const HomeHeroSection = () => {
   return (
@@ -19,6 +20,7 @@ const HomeHeroSection = () => {
           description="lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet."
           category="IT"
           date="28/02/2023"
+          isTransparent
         />
         <TextArticle title="Sporedna vest broj jedan" borderLeft="1px" verticalSpacing="10px" />
         <TextArticle title="Sporedna vest broj jedan" borderLeft="1px" verticalSpacing="10px" />
@@ -36,13 +38,14 @@ const HomeHeroSection = () => {
           category="BIZ"
           titleSize="3xl"
           hasColor
-          minHeight="100%"
+          minHeight="480px"
         />
       </GridItem>
       <GridItem h={{ base: "auto", md: "480px" }} p="2">
-        <Heading as="h3" fontSize="sm">
+        <Heading as="h3" mb='4' fontSize="sm">
           Odabrani članci
         </Heading>
+        <SelectedArticlesSection />
       </GridItem>
     </Grid>
   );

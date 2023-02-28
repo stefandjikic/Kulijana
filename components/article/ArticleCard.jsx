@@ -8,6 +8,7 @@ const ArticleCard = ({
   category = "",
   title = "",
   description = "",
+  titleSize ="xl",
 }) => {
   const cardBG = useColorModeValue(
     hasColor ? "#f2dfce" : "#fff7ef",
@@ -26,7 +27,7 @@ const ArticleCard = ({
         <Text color={accentColor} fontWeight='bold' fontSize="x-small" textTransform="uppercase">
           {category || "KATEGORIJA"}
         </Text>
-        <Heading as="h3" fontSize="xl" my="4">
+        <Heading as="h3" fontSize={titleSize} my="4">
           {title}
         </Heading>
         <Text>{description}</Text>

@@ -7,16 +7,20 @@ const TextArticle = ({
   borderRight = '',
   borderTop = '',
   borderLeft = '',
-  borderColor = 'blackAlpha.400'
+  borderColor = 'blackAlpha.400',
+  verticalSpacing = "",
+  horizontalSpacing = "",
 }) => {
   return (
     <Box
-      p={{base: '5', md: '10'}}
+      p='4'
       borderTop={borderTop}
       borderBottom={borderBottom}
       borderRight={borderRight}
       borderLeft={borderLeft}
       borderColor={borderColor}
+      my={verticalSpacing}
+      mx={horizontalSpacing}
     >
       <Heading fontSize="lg">{title}</Heading>
     </Box>

@@ -142,15 +142,15 @@ export default function Home() {
           description="Nešto jako zanimljivo. Hmmm, jeste stvarno!"
         />
       </TopicsTwoColumnGrid>
-      <GridSectionWithTitle title="ZABAVA" columnLg="2">
+      <GridSectionWithTitle title="MAGAZIN" columnLg="2">
         <ArticleCard
-          category="Lifestyle"
-          title="Neki naslov iz lifestyle teme"
+          category="Trening snage"
+          title="Neki naslov iz powerlifting teme"
           largeImage
           minHeight="400px"
         />
         <ArticleCard
-          category="Zabava"
+          category="Zdravlje"
           title="Neki naslov iz zabava teme"
           largeImage
           minHeight="400px"

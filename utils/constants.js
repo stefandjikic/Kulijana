@@ -9,25 +9,26 @@ export const MAIN_NAV = [
     id: 2,
     title: "IT",
     route: "/it",
-    subLinks: [
-      {
-        title: "Servisi i Softver",
-        route: "/it/softver",
-      },
-      {
-        title: "Uređaji",
-        route: "/it/uredjaji",
-      },
-      {
-        title: "Internet",
-        route: "/it/internet",
-      },
-    ],
+    subLinks: null,
+    // subLinks: [
+    //   {
+    //     title: "Servisi i Softver",
+    //     route: "/it/softver",
+    //   },
+    //   {
+    //     title: "Uređaji",
+    //     route: "/it/uredjaji",
+    //   },
+    //   {
+    //     title: "Internet",
+    //     route: "/it/internet",
+    //   },
+    // ],
   },
   {
     id: 3,
     title: "Nauka i Tehnologija",
-    route: "/nauka",
+    route: "/nauka-i-tehnologija",
     subLinks: null,
   },
   {
@@ -42,21 +43,24 @@ export const MAIN_NAV = [
     route: "/kultura",
     subLinks: [
       {
+        id: 5.1,
         title: "Film",
-        route: "/kultura/film",
+        route: "/film",
       },
       {
+        id: 5.2,
         title: "Muzika",
-        route: "/kultura/muzika",
+        route: "/muzika",
       },
       {
+        id: 5.3,
         title: "Umetnost",
-        route: "/kultura/umetnost",
+        route: "/umetnost",
       },
-      {
-        title: "Književnost",
-        route: "/kultura/književnost",
-      },
+      // {
+      //   title: "Književnost",
+      //   route: "/kultura/književnost",
+      // },
     ],
   },
   {
@@ -65,16 +69,19 @@ export const MAIN_NAV = [
     route: "/zanimljivosti",
     subLinks: [
       {
+        id: 6.1,
         title: "Istorija",
-        route: "/zanimljivost/istorija",
+        route: "/istorija",
       },
       {
+        id: 6.2,
         title: "Društvo",
-        route: "/zanimljivost/društvo",
+        route: "/drustvo",
       },
       {
+        id: 6.3,
         title: "Svet oko nas",
-        route: "/zanimljivost/svet-oko-nas",
+        route: "/svet-oko-nas",
       },
     ],
   },
@@ -84,16 +91,14 @@ export const MAIN_NAV = [
     route: "/magazin",
     subLinks: [
       {
+        id: 7.1,
         title: "Zdravlje",
-        route: "/magazin/zdravlje",
+        route: "/zdravlje",
       },
       {
-        title: "Lifestyle",
-        route: "/magazin/lifestyle",
-      },
-      {
-        title: "Zabava",
-        route: "/magazin/zabava",
+        id: 7.2,
+        title: "Trening kutak",
+        route: "/trening-kutak",
       },
     ],
   },

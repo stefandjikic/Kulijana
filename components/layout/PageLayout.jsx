@@ -2,7 +2,7 @@ import { Box, Container, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 import PageSidebar from "./PageSidebar";
 
-const PageLayout = ({ children }) => {
+const PageLayout = ({ children, isReadingPage = false }) => {
   return (
     <Container maxW="1200px">
       <Grid
@@ -11,7 +11,7 @@ const PageLayout = ({ children }) => {
       >
         <GridItem>{children}</GridItem>
         <GridItem>
-          <PageSidebar />
+          <PageSidebar isReadingPage={isReadingPage} />
         </GridItem>
       </Grid>
     </Container>

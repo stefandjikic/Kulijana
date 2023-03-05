@@ -6,7 +6,7 @@ import React from "react";
 const SlugInCategory = () => {
   return (
     <Layout>
-      <PageLayout>
+      <PageLayout isReadingPage>
         <Heading mb="5">Naslov teksta</Heading>
         <Text mb="5">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

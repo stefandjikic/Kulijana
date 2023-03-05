@@ -3,7 +3,7 @@ import React from "react";
 import HeadlineImageArticleCard from "../article/HeadlineImageArticleCard";
 import TextArticle from "../article/TextArticle";
 
-const PageSidebar = ({ isReadingPage = true }) => {
+const PageSidebar = ({ isReadingPage = false }) => {
   return (
     <Box borderTop="2px" py="2" px={{ base: "0", md: "4" }}>
       {isReadingPage && (

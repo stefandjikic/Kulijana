@@ -92,8 +92,8 @@ export const MAIN_NAV = [
     subLinks: [
       {
         id: 7.1,
-        title: "Zdravlje",
-        route: "/zdravlje",
+        title: "Lifestyle",
+        route: "/lifestyle",
       },
       {
         id: 7.2,

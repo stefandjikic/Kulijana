@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { Container } from "@chakra-ui/react";
 import MainNavigation from "./MainNavigation";
+import Footer from "./Footer";
 
 const Layout = ({ children, title = "" }) => {
   return (
@@ -24,8 +25,7 @@ const Layout = ({ children, title = "" }) => {
       <Container maxW="1280px">
         <main style={{ minHeight: "80vh" }}>{children}</main>
       </Container>
-
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

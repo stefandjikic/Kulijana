@@ -12,10 +12,12 @@ import InfoComponent from "@/components/utils/InfoComponent";
 import { Box, Grid, Heading } from "@chakra-ui/react";
 import TextArticle from "@/components/article/TextArticle";
 import GridSectionWithTitle from "@/components/utils/GridSectionWithTitle";
+import { getArticles } from "@/services";
 
 // const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({articles = []}) {
+  console.log(articles, 'articles');
   return (
     <Layout>
       <HomeHeroSection />
@@ -159,3 +161,13 @@ export default function Home() {
     </Layout>
   );
 }
+
+// export async function getStaticProps() {
+//   const articles = (await getArticles()) || [];
+
+//   return {
+//     props: {
+//       articles,
+//     },
+//   };
+// }

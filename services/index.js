@@ -196,3 +196,25 @@ export const getHomePageArticles = async () => {
   const response = await request(graphqlAPI, query);
   return response;
 };
+
+export const getFeaturedArticle = async () => {
+  const query = gql`
+    query FeaturedArticles {
+      articles(last: 5, where: { featured: true }) {
+        id
+        category {
+          name
+        }
+        articleImage {
+          url
+        }
+        createdAt
+        excerpt
+        title
+        slug
+      }
+    }
+  `;
+  const response = await request(graphqlAPI, query);
+  return response;
+};

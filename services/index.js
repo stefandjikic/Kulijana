@@ -218,3 +218,65 @@ export const getFeaturedArticle = async () => {
   const response = await request(graphqlAPI, query);
   return response;
 };
+
+export const getCategoriesBySlug = async () => {
+  const query = gql`
+    query GetCategoriesBySlug {
+      categories {
+        id
+        slug
+      }
+    }
+  `;
+  const response = await request(graphqlAPI, query);
+  return response;
+};
+
+export const getArticlesByCategory = async (categorySlug) => {
+  const resolveCategories = () => {
+    switch (categorySlug) {
+      case "zanimljivosti":
+        return '{OR: [{slug: $categorySlug}, {slug: "istorija"}, {slug: "drustvo"}, {slug: "svet-oko-nas"}]}';
+      case "kultura":
+        return '{OR: [{slug: $categorySlug}, {slug: "film"}, {slug: "muzika"}, {slug: "umetnost"}]}';
+      case "magazin":
+        return '{OR: [{slug: $categorySlug}, {slug: "lifestyle"}, {slug: "trening-kutak"}]}';
+      default:
+        return "{ slug: $categorySlug }";
+    }
+  };
+
+  const query = gql`
+    query ArticlesByCategory($categorySlug: String = "zanimljivosti") {
+      articlesConnection(where: { category: ${resolveCategories()} }) {
+        edges {
+          node {
+            id
+            slug
+            title
+            createdAt
+            featured
+            authorChoice
+            excerpt
+            author {
+              name
+            }
+            articleImage {
+              url
+            }
+            category {
+              name
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const { articlesConnection: { edges = [] } = {} } = await request(
+    graphqlAPI,
+    query,
+    { categorySlug }
+  );
+  return edges;
+};

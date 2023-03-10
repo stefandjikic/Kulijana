@@ -221,12 +221,12 @@ export const getFeaturedArticle = async () => {
 
 export const getCategoriesBySlug = async () => {
   const query = gql`
-    query GetCategoriesBySlug {
-      categories {
-        id
-        slug
-      }
+  query GetCategoriesBySlug {
+    categories(last: 20) {
+      id
+      slug
     }
+  }
   `;
   const response = await request(graphqlAPI, query);
   return response;

@@ -197,13 +197,14 @@ export const getHomePageArticles = async () => {
   return response;
 };
 
-export const getFeaturedArticle = async () => {
+export const getFeaturedArticles = async () => {
   const query = gql`
     query FeaturedArticles {
       articles(last: 5, where: { featured: true }) {
         id
         category {
           name
+          slug
         }
         articleImage {
           url
@@ -212,11 +213,12 @@ export const getFeaturedArticle = async () => {
         excerpt
         title
         slug
+        featured
       }
     }
   `;
-  const response = await request(graphqlAPI, query);
-  return response;
+  const { articles = [] } = await request(graphqlAPI, query);
+  return articles;
 };
 
 export const getCategoriesBySlug = async () => {

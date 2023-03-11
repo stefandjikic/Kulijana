@@ -1,3 +1,6 @@
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import {
   Flex,
   Grid,
@@ -6,9 +9,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import defaultImage from "@/public/assets/img/default-placeholder.png";
 
 const BigArticleCard = ({
   hasColor = false,
@@ -21,7 +22,6 @@ const BigArticleCard = ({
   verticalSpace = "",
   imgUrl = "",
   href = "/kategorija/article",
-  // TODO: Add Fallback Image
 }) => {
   const cardBG = useColorModeValue(
     hasColor ? "#f2dfce" : "#fff7ef",
@@ -59,7 +59,7 @@ const BigArticleCard = ({
           <Text>{description}</Text>
         </Flex>
         <GridItem bg="blackAlpha.600" position="relative">
-          <Image src={imgUrl} alt={title} fill style={{ objectFit: "cover" }} />
+          <Image src={imgUrl || defaultImage} alt={title} fill style={{ objectFit: "cover" }} />
         </GridItem>
       </Grid>
     </Link>

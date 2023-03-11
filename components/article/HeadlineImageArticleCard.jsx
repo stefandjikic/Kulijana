@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Box, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import defaultImage from "@/public/assets/img/default-placeholder.png";
 
 const HeadlineImageArticleCard = ({
   hasColor = false,
@@ -10,6 +12,7 @@ const HeadlineImageArticleCard = ({
   title = "",
   titleSize = "xl",
   verticalSpacing = "",
+  imgUrl = "",
   href = "/kategorija/article",
 }) => {
   const cardBG = useColorModeValue(
@@ -26,8 +29,13 @@ const HeadlineImageArticleCard = ({
         p="2"
         my={verticalSpacing}
       >
-        <Box height="70%" bg="blackAlpha.600">
-          SLIKA
+        <Box height="70%" bg="blackAlpha.600" position="relative">
+          <Image
+            src={imgUrl || defaultImage}
+            alt={title}
+            fill
+            style={{ objectFit: "cover" }}
+          />
         </Box>
         <Box mt="2" textAlign="center">
           <Text

@@ -1,7 +1,8 @@
-import { Box, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { Box, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import defaultImage from "@/public/assets/img/default-placeholder.png";
 
 const ArticleCard = ({
   hasColor = false,
@@ -36,9 +37,14 @@ const ArticleCard = ({
             md: largeImage ? "80%" : "40%",
           }}
           bg="blackAlpha.600"
-          position='relative'
+          position="relative"
         >
-          <Image src={imgUrl} alt={title} fill style={{ objectFit: "cover" }} />
+          <Image
+            src={imgUrl || defaultImage}
+            alt={title}
+            fill
+            style={{ objectFit: "cover" }}
+          />
         </Box>
         <Box mt="2">
           <Text

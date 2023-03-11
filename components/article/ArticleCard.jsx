@@ -1,4 +1,5 @@
 import { Box, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -12,6 +13,7 @@ const ArticleCard = ({
   titleSize = "xl",
   largeImage = false,
   verticalSpacing = "",
+  imgUrl = "",
   href = "/kategorija/article",
 }) => {
   const cardBG = useColorModeValue(
@@ -34,8 +36,9 @@ const ArticleCard = ({
             md: largeImage ? "80%" : "40%",
           }}
           bg="blackAlpha.600"
+          position='relative'
         >
-          SLIKA
+          <Image src={imgUrl} alt={title} fill style={{ objectFit: "cover" }} />
         </Box>
         <Box mt="2">
           <Text

@@ -17,7 +17,6 @@ import { getHomePageArticles } from "@/services";
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({articles = []}) {
-  console.log(articles, 'articles');
   return (
     <Layout>
       <HomeHeroSection />

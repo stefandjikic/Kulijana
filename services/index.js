@@ -221,12 +221,18 @@ export const getFeaturedArticle = async () => {
 
 export const getCategoriesBySlug = async () => {
   const query = gql`
-  query GetCategoriesBySlug {
-    categories(last: 20) {
-      id
-      slug
+    query GetCategories {
+      categories(last: 20) {
+        id
+        slug
+        name
+        relatedCategories {
+          id
+          name
+          slug
+        }
+      }
     }
-  }
   `;
   const response = await request(graphqlAPI, query);
   return response;
@@ -248,7 +254,7 @@ export const getArticlesByCategory = async (categorySlug) => {
 
   const query = gql`
     query ArticlesByCategory($categorySlug: String = "zanimljivosti") {
-      articlesConnection(where: { category: ${resolveCategories()} }) {
+      articlesConnection(where: { category: ${resolveCategories()} }, last: 10) {
         edges {
           node {
             id

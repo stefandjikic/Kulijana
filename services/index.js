@@ -272,6 +272,7 @@ export const getArticlesByCategory = async (categorySlug) => {
             }
             category {
               name
+              slug
             }
           }
         }

@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useRouter } from "next/router";
 import { Heading } from "@chakra-ui/react";
 import ArticleCard from "@/components/article/ArticleCard";
 import BigArticleCard from "@/components/article/BigArticleCard";
@@ -6,16 +7,13 @@ import Layout from "@/components/layout/Layout";
 import PageLayout from "@/components/layout/PageLayout";
 import GridSectionWithTitle from "@/components/utils/GridSectionWithTitle";
 import { getArticlesByCategory, getCategoriesBySlug } from "@/services";
+import { resolvePageTitle } from "@/utils/helpers";
 
 const DynamicCategoryPage = ({ articles = [] }) => {
   // console.log(articles, "articles");
-  // TODO: set fallback to getting title from URL
-  const pageTitle = useMemo(
-    () =>
-      articles.map((article) => article?.node?.category?.name)[0] ||
-      "Kategorija",
-    [articles]
-  );
+  const router = useRouter();
+  const { category } = router.query;
+
   const parsedArticles = useMemo(
     () => articles.map((article) => article?.node),
     [articles]
@@ -24,37 +22,29 @@ const DynamicCategoryPage = ({ articles = [] }) => {
   return (
     <Layout>
       <PageLayout>
-        <Heading mb="5">{pageTitle}</Heading>
+        <Heading mb="10">{resolvePageTitle(category) || ""}</Heading>
         <BigArticleCard
-          href={parsedArticles[0]?.slug}
+          href={`/${parsedArticles[0]?.category?.slug}/${parsedArticles[0]?.slug}`}
           category={parsedArticles[0]?.category?.name || ""}
-          title={
-            parsedArticles[0]?.title || "Naslov poslednjeg članka u kategoriji"
-          }
+          title={parsedArticles[0]?.title || ""}
           description={parsedArticles[0]?.excerpt || ""}
           imgUrl={parsedArticles[0]?.articleImage?.url}
         />
         <GridSectionWithTitle gap="6">
           {parsedArticles[1] && (
             <ArticleCard
-              href={parsedArticles[1]?.slug}
+              href={`/${parsedArticles[1]?.category?.slug}/${parsedArticles[1]?.slug}`}
               category={parsedArticles[1]?.category?.name || ""}
-              title={
-                parsedArticles[1]?.title ||
-                "Naslov poslednjeg članka u kategoriji"
-              }
+              title={parsedArticles[1]?.title || ""}
               description={parsedArticles[1]?.excerpt || ""}
               imgUrl={parsedArticles[1]?.articleImage?.url}
             />
           )}
           {parsedArticles[2] && (
             <ArticleCard
-              href={parsedArticles[2]?.slug}
+              href={`/${parsedArticles[2]?.category?.slug}/${parsedArticles[2]?.slug}`}
               category={parsedArticles[2]?.category?.name || ""}
-              title={
-                parsedArticles[2]?.title ||
-                "Naslov poslednjeg članka u kategoriji"
-              }
+              title={parsedArticles[2]?.title || ""}
               description={parsedArticles[3]?.excerpt || ""}
               imgUrl={parsedArticles[2]?.articleImage?.url}
             />
@@ -66,9 +56,11 @@ const DynamicCategoryPage = ({ articles = [] }) => {
             headingSize="xl"
             verticalSpace="15px"
             key={item.id}
-            title={item?.title || "Naslov ostalih članaka u kategoriji"}
+            title={item?.title || ""}
             description={item?.excerpt || ""}
             imgUrl={item?.articleImage?.url}
+            category={item?.category?.name}
+            href={`/${item?.category?.slug}/${item?.slug}`}
           />
         ))}
       </PageLayout>

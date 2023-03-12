@@ -6,7 +6,7 @@ import BigArticleCard from "@/components/article/BigArticleCard";
 import Layout from "@/components/layout/Layout";
 import PageLayout from "@/components/layout/PageLayout";
 import GridSectionWithTitle from "@/components/utils/GridSectionWithTitle";
-import { getArticlesByCategory, getCategoriesBySlug } from "@/services";
+import { getArticlesByCategory, getCategoriesBySlug } from "@/graphQL";
 import { resolvePageTitle } from "@/utils/helpers";
 
 const DynamicCategoryPage = ({ articles = [] }) => {

@@ -13,7 +13,7 @@ const HeadlineImageArticleCard = ({
   titleSize = "xl",
   verticalSpacing = "",
   imgUrl = "",
-  href = "/kategorija/article",
+  href = "",
 }) => {
   const cardBG = useColorModeValue(
     hasColor ? "#f2dfce" : "#fff7ef",

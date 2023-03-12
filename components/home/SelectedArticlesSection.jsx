@@ -3,16 +3,21 @@ import { Box, Text } from "@chakra-ui/react";
 import ArticleCard from "../article/ArticleCard";
 import TextArticle from "../article/TextArticle";
 
-const SelectedArticlesSection = () => {
+const SelectedArticlesSection = ({ pickedArticles = [] }) => {
   return (
     <Box>
       <ArticleCard
-        title="Odabrani članak od strane Kulijane"
+        title={pickedArticles[1].title}
+        imgUrl={pickedArticles[1]?.articleImage?.url}
+        href={`${pickedArticles[1]?.category?.slug}/${pickedArticles[1]?.slug}`}
         isTransparent
         minHeight={{ base: "300px", md: "250px" }}
         titleSize="md"
       />
-      <TextArticle title="Odabrani članak od strane Kulijane bez slike" borderTop="1px" />
+      <TextArticle
+        title={pickedArticles[0].title}
+        borderTop="1px"
+      />
     </Box>
   );
 };

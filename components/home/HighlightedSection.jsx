@@ -26,6 +26,8 @@ const HighlightedSection = () => {
               category={article?.category?.name}
               title={article?.title}
               description={article?.excerpt}
+              imgUrl={article?.articleImage?.url}
+              href={`${article?.category?.slug}/${article?.slug}`}
             />
           ))}
       </Grid>

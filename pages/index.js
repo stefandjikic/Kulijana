@@ -1,5 +1,3 @@
-import Head from "next/head";
-// import Image from 'next/image'
 // import { Inter } from 'next/font/google'
 import Layout from "@/components/layout/Layout";
 import HomeHeroSection from "@/components/home/HomeHeroSection";
@@ -12,44 +10,62 @@ import InfoComponent from "@/components/utils/InfoComponent";
 import { Box, Grid, Heading } from "@chakra-ui/react";
 import TextArticle from "@/components/article/TextArticle";
 import GridSectionWithTitle from "@/components/utils/GridSectionWithTitle";
-import { getHomePageArticles } from "@/services";
+import { getHomePageArticles } from "@/graphQL";
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ articles = [] }) {
+  // console.log(articles, "articles");
+  const {
+    heroArticles = [],
+    authorChoice = [],
+    scienceAndTech = [],
+    it: itArticles = [],
+    biz = [],
+    culture = [],
+    funFact = [],
+    interestingFacts = [],
+    magazine = [],
+  } = { ...articles } || [];
+  console.log(itArticles, "itArticles");
   return (
     <Layout>
-      <HomeHeroSection />
+      <HomeHeroSection
+        heroArticles={heroArticles}
+        pickedArticles={authorChoice}
+      />
       <HighlightedSection />
       <TopicsTwoColumnGrid title="NAUKA I TEHNOLOGIJA">
         <BigArticleCard
           minHeight="400px"
           isTransparent
-          category="Tehnologija"
-          title="Naslov članka bla bla bla"
-          description="Kratak opis teksta. Verovatno ne duže od 100 karaktera."
+          category={scienceAndTech[0]?.category.name}
+          title={scienceAndTech[0]?.title}
+          description={scienceAndTech[0]?.excerpt}
+          imgUrl={scienceAndTech[0]?.articleImage?.url}
+          href={`${scienceAndTech[0]?.category?.slug}/${scienceAndTech[0]?.slug}`}
         />
         <ArticleCard
           minHeight="400px"
           isTransparent
-          title="Šta su to RNK vakcine?"
+          category={scienceAndTech[1]?.category.name}
+          title={scienceAndTech[1]?.title}
+          description={scienceAndTech[1]?.excerpt}
+          imgUrl={scienceAndTech[1]?.articleImage?.url}
+          href={`${scienceAndTech[1]?.category?.slug}/${scienceAndTech[1]?.slug}`}
         />
       </TopicsTwoColumnGrid>
       <TopicsFourColumnGrid title="IT">
-        <ArticleCard hasColor category="Softver" title="Novi softer naslov" />
-        <ArticleCard
-          hasColor
-          category="Uređaji"
-          title="Novi telefon naslov"
-          description="Po prvi put, korisnici širom sveta mogu isprobati prepoznatljive Leica kamere na Xiaomi 13, Xiaomi 13 Pro i Xiaomi 13 Lite modelima "
-        />
-        <ArticleCard
-          hasColor
-          category="Internet"
-          title="Nokia dobila novi logo"
-          description="Nokia logo je dobio svoj novi izgled, a po prvi put u skoro 60 godina ova kompanija, nekadašnji gigant industrije telefona menja svoj vizuelni identitet. "
-        />
-        <ArticleCard hasColor />
+        {itArticles?.map((itArticle) => (
+          <ArticleCard
+            key={itArticle?.id}
+            hasColor
+            category={itArticle?.category?.name}
+            title={itArticle?.title}
+            description={itArticle?.excerpt}
+            imgUrl={itArticle?.articleImage?.url}
+          />
+        ))}
       </TopicsFourColumnGrid>
       <TopicsTwoColumnGrid title="BIZ">
         <BigArticleCard
@@ -161,12 +177,12 @@ export default function Home({ articles = [] }) {
   );
 }
 
-// export async function getStaticProps() {
-//   const articles = (await getHomePageArticles()) || [];
+export async function getStaticProps() {
+  const articles = (await getHomePageArticles()) || [];
 
-//   return {
-//     props: {
-//       articles,
-//     },
-//   };
-// }
+  return {
+    props: {
+      articles,
+    },
+  };
+}

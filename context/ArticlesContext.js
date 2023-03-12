@@ -1,4 +1,4 @@
-import { getFeaturedArticles } from "@/services";
+import { getFeaturedArticles } from "@/graphQL";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const ArticlesContext = createContext();

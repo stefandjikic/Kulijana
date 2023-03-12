@@ -44,6 +44,7 @@ export const getHomePageArticles = async () => {
         title
         category {
           name
+          slug
         }
         excerpt
         featured
@@ -62,6 +63,7 @@ export const getHomePageArticles = async () => {
         }
         category {
           name
+          slug
         }
       }
       scienceAndTech: articles(
@@ -73,6 +75,7 @@ export const getHomePageArticles = async () => {
         title
         category {
           name
+          slug
         }
         excerpt
         featured
@@ -87,6 +90,7 @@ export const getHomePageArticles = async () => {
         title
         category {
           name
+          slug
         }
         excerpt
         featured
@@ -101,6 +105,7 @@ export const getHomePageArticles = async () => {
         title
         category {
           name
+          slug
         }
         excerpt
         featured
@@ -115,6 +120,7 @@ export const getHomePageArticles = async () => {
         title
         category {
           name
+          slug
         }
         excerpt
         featured
@@ -132,6 +138,7 @@ export const getHomePageArticles = async () => {
         title
         category {
           name
+          slug
         }
         excerpt
         featured
@@ -156,6 +163,7 @@ export const getHomePageArticles = async () => {
         title
         category {
           name
+          slug
         }
         excerpt
         featured
@@ -181,6 +189,7 @@ export const getHomePageArticles = async () => {
         title
         category {
           name
+          slug
         }
         excerpt
         featured
@@ -212,6 +221,27 @@ export const getFeaturedArticles = async () => {
         title
         slug
         featured
+      }
+    }
+  `;
+  const { articles = [] } = await request(graphqlAPI, query);
+  return articles;
+};
+
+export const getAuthorChoiceArticles = async () => {
+  const query = gql`
+    query AuthorChoice {
+      articles(last: 2, where: { authorChoice: true }) {
+        id
+        slug
+        title
+        createdAt
+        articleImage {
+          url
+        }
+        category {
+          name
+        }
       }
     }
   `;

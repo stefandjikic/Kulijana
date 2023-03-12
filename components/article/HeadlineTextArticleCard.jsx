@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Box, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import { formatDate } from "@/utils/helpers";
 
 const HeadlineTextArticleCard = ({
   hasColor = false,
@@ -32,12 +33,17 @@ const HeadlineTextArticleCard = ({
           >
             {category || "KATEGORIJA"}
           </Text>
-          <Heading className="limit-heading" as="h3" fontSize={titleSize} my="4">
+          <Heading
+            className="limit-heading"
+            as="h3"
+            fontSize={titleSize}
+            my="4"
+          >
             {title}
           </Heading>
           <Text>{description || ""}</Text>
           <Box color={accentColor} fontSize="xs" mt="4">
-            {date || ""}
+            {formatDate(date) || ""}
           </Box>
         </Box>
       </Box>

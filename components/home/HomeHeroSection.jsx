@@ -5,7 +5,7 @@ import HeadlineTextArticleCard from "../article/HeadlineTextArticleCard";
 import TextArticle from "../article/TextArticle";
 import SelectedArticlesSection from "./SelectedArticlesSection";
 
-const HomeHeroSection = () => {
+const HomeHeroSection = ({ heroArticles = [], pickedArticles = [] }) => {
   return (
     <Grid
       gridTemplateColumns={{ base: "1fr", md: "0.4fr auto 0.2fr" }}
@@ -13,17 +13,29 @@ const HomeHeroSection = () => {
       mt="10"
     >
       <GridItem h={{ base: "auto", md: "480px" }} p="2">
-        {/* POST ONE */}
+        {/* POST ONE TEXT */}
         <HeadlineTextArticleCard
-          title="Ogroman naslov ide ovde. Pomepezno uou, neverovatno!"
-          // TODO: Limit this title to 3 lines max so it does not break the ui !!!
-          description="lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet."
-          category="IT"
-          date="28/02/2023"
+          href={`${heroArticles[2]?.category?.slug}/${heroArticles[2]?.slug}`}
+          title={heroArticles[2]?.title}
+          description={heroArticles[2]?.excerpt}
+          category={heroArticles[2]?.category?.name}
+          date={heroArticles[2]?.createdAt}
           isTransparent
         />
-        <TextArticle title="Sporedna vest broj jedan" borderLeft="1px" verticalSpacing="10px" />
-        <TextArticle title="Sporedna vest broj jedan" borderLeft="1px" verticalSpacing="10px" />
+        {/* POST TWO TEXT */}
+        <TextArticle
+          href={`${heroArticles[1]?.category?.slug}/${heroArticles[1]?.slug}`}
+          title={heroArticles[1]?.title}
+          borderLeft="1px"
+          verticalSpacing="10px"
+        />
+        {/* POST THREE TEXT */}
+        <TextArticle
+          href={`${heroArticles[0]?.category?.slug}/${heroArticles[0]?.slug}`}
+          title={heroArticles[0]?.title}
+          borderLeft="1px"
+          verticalSpacing="10px"
+        />
       </GridItem>
       <GridItem
         h={{ base: "auto", md: "480px" }}
@@ -32,20 +44,22 @@ const HomeHeroSection = () => {
         borderColor="blackAlpha.300"
         p="2"
       >
-        {/* POST TWO */}
+        {/* POST ONE IMAGE */}
         <HeadlineImageArticleCard
-          title="Veliki naslov - Udarni"
-          category="BIZ"
+          title={heroArticles[3]?.title}
+          category={heroArticles[3]?.category?.name}
+          imgUrl={heroArticles[3]?.articleImage?.url}
+          href={`${heroArticles[3]?.category?.slug}/${heroArticles[3]?.slug}`}
           titleSize="3xl"
           hasColor
           minHeight="480px"
         />
       </GridItem>
       <GridItem h={{ base: "auto", md: "480px" }} p="2">
-        <Heading as="h3" mb='4' fontSize="sm">
+        <Heading as="h3" mb="4" fontSize="sm">
           Odabrani članci
         </Heading>
-        <SelectedArticlesSection />
+        <SelectedArticlesSection pickedArticles={pickedArticles} />
       </GridItem>
     </Grid>
   );

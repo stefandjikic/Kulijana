@@ -7,7 +7,7 @@ import defaultImage from "@/public/assets/img/default-placeholder.png";
 const ArticleCard = ({
   hasColor = false,
   isTransparent = false,
-  minHeight = "350px",
+  minHeight = { base: "500px", md: "350px" },
   category = "",
   title = "",
   description = "",
@@ -33,7 +33,7 @@ const ArticleCard = ({
       >
         <Box
           height={{
-            base: largeImage ? "80%" : "70%",
+            base: largeImage ? "80%" : "60%",
             md: largeImage ? "80%" : "40%",
           }}
           bg="blackAlpha.600"
@@ -55,10 +55,15 @@ const ArticleCard = ({
           >
             {category || "KATEGORIJA"}
           </Text>
-          <Heading as="h3" fontSize={titleSize} my="4">
+          <Heading
+            className="limit-heading-sm"
+            as="h3"
+            fontSize={titleSize}
+            my="4"
+          >
             {title}
           </Heading>
-          <Text>{description}</Text>
+          <Text className="limit-description">{description}</Text>
         </Box>
       </Box>
     </Link>

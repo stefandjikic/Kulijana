@@ -32,7 +32,7 @@ const HeadlineTextArticleCard = ({
           >
             {category || "KATEGORIJA"}
           </Text>
-          <Heading as="h3" fontSize={titleSize} my="4">
+          <Heading className="limit-heading" as="h3" fontSize={titleSize} my="4">
             {title}
           </Heading>
           <Text>{description || ""}</Text>

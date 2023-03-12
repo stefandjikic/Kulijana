@@ -52,19 +52,17 @@ export const getHomePageArticles = async () => {
         }
         createdAt
       }
-      featuredArticles: articles(last: 4, where: { featured: true }) {
+      authorChoice: articles(last: 2, where: { authorChoice: true }) {
         id
         slug
         title
-        category {
-          name
-        }
-        excerpt
-        featured
+        createdAt
         articleImage {
           url
         }
-        createdAt
+        category {
+          name
+        }
       }
       scienceAndTech: articles(
         last: 2

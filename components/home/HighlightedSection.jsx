@@ -1,12 +1,10 @@
-import {
-  Box,
-  Grid,
-  Heading,
-} from "@chakra-ui/react";
 import React from "react";
+import { Box, Grid, Heading } from "@chakra-ui/react";
+import { useArticlesContext } from "@/context/ArticlesContext";
 import ArticleCard from "../article/ArticleCard";
 
 const HighlightedSection = () => {
+  const { featuredArticles } = useArticlesContext();
 
   return (
     <Box my="10">
@@ -20,10 +18,16 @@ const HighlightedSection = () => {
         Istaknuto
       </Heading>
       <Grid gridTemplateColumns={{ base: "1fr", md: "repeat(4, 1fr)" }} gap="4">
-        <ArticleCard />
-        <ArticleCard/>
-        <ArticleCard />
-        <ArticleCard />
+        {featuredArticles &&
+          featuredArticles?.length > 0 &&
+          featuredArticles?.slice(0, 4)?.map((article) => (
+            <ArticleCard
+              key={article?.id}
+              category={article?.category?.name}
+              title={article?.title}
+              description={article?.excerpt}
+            />
+          ))}
       </Grid>
     </Box>
   );

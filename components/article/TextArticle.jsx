@@ -37,7 +37,9 @@ const TextArticle = ({
             {category}
           </Text>
         )}
-        <Heading fontSize="lg">{title}</Heading>
+        <Heading className="limit-heading-sm" fontSize="lg">
+          {title}
+        </Heading>
       </Box>
     </Link>
   );

@@ -87,6 +87,27 @@ a {
   display: block;
 }
 
+.limit-heading,
+.limit-heading-sm,
+.limit-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+          line-clamp: 3; 
+  -webkit-box-orient: vertical;
+}
+
+.limit-heading-sm {
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2; 
+}
+
+.limit-description {
+  -webkit-line-clamp: 4; /* number of lines to show */
+  line-clamp: 4; 
+}
+
 @media screen and (max-width: 768px) {
   .nav-item:hover > .nav-item-dropdown {
     display: none;

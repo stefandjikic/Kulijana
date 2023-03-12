@@ -53,13 +53,23 @@ const BigArticleCard = ({
           >
             {category || "KATEGORIJA"}
           </Text>
-          <Heading as="h3" my="4" fontSize={headingSize}>
+          <Heading
+            className="limit-heading"
+            as="h3"
+            my="4"
+            fontSize={headingSize}
+          >
             {title}
           </Heading>
-          <Text>{description}</Text>
+          <Text className="limit-description">{description}</Text>
         </Flex>
         <GridItem bg="blackAlpha.600" position="relative">
-          <Image src={imgUrl || defaultImage} alt={title} fill style={{ objectFit: "cover" }} />
+          <Image
+            src={imgUrl || defaultImage}
+            alt={title}
+            fill
+            style={{ objectFit: "cover" }}
+          />
         </GridItem>
       </Grid>
     </Link>

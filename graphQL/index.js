@@ -38,7 +38,14 @@ export const getArticles = async () => {
 export const getHomePageArticles = async () => {
   const query = gql`
     query HomePageQuery {
-      heroArticles: articles(last: 4) {
+      heroArticles: articles(
+        last: 4
+        where: {
+          NOT: {
+            OR: [{ category: { slug: "da-li-ste-znali" } }, { featured: true }]
+          }
+        }
+      ) {
         id
         slug
         title
@@ -114,7 +121,19 @@ export const getHomePageArticles = async () => {
         }
         createdAt
       }
-      culture: articles(last: 4, where: { category: { slug: "kultura" } }) {
+      culture: articles(
+        last: 4
+        where: {
+          category: {
+            OR: [
+              { slug: "kultura" }
+              { slug: "film" }
+              { slug: "muzika" }
+              { slug: "umetnost" }
+            ]
+          }
+        }
+      ) {
         id
         slug
         title

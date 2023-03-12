@@ -11,6 +11,7 @@ import { Box, Grid, Heading } from "@chakra-ui/react";
 import TextArticle from "@/components/article/TextArticle";
 import GridSectionWithTitle from "@/components/utils/GridSectionWithTitle";
 import { getHomePageArticles } from "@/graphQL";
+import InterestingFactsSection from "@/components/home/InterestingFactsSection";
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -27,7 +28,6 @@ export default function Home({ articles = [] }) {
     interestingFacts = [],
     magazine = [],
   } = { ...articles } || [];
-  console.log(itArticles, "itArticles");
   return (
     <Layout>
       <HomeHeroSection
@@ -70,105 +70,50 @@ export default function Home({ articles = [] }) {
       <TopicsTwoColumnGrid title="BIZ">
         <BigArticleCard
           minHeight="400px"
-          category="Biznis"
-          title="Naslov članka biz biz"
-          description="Kratak opis teksta. Verovatno ne duže od 100 karaktera."
+          title={biz[1]?.title}
+          category={biz[1]?.category?.name}
+          description={biz[1]?.excerpt}
+          imgUrl={biz[1]?.articleImage?.url}
+          href={`${biz[1]?.category?.slug}/${biz[1]?.slug}`}
         />
         <ArticleCard
           minHeight="400px"
-          title="Šta se dešava u Twitteru?"
-          description="Ilon Mask nešto piše kao po običaju. Smrtnici se lože."
+          title={biz[0]?.title}
+          category={biz[0]?.category?.name}
+          description={biz[0]?.excerpt}
+          imgUrl={biz[0]?.articleImage?.url}
+          href={`${biz[0]?.category?.slug}/${biz[0]?.slug}`}
         />
       </TopicsTwoColumnGrid>
       <TopicsFourColumnGrid title="KULTURA">
-        <ArticleCard
-          isTransparent
-          category="FILM"
-          title="Novi film Darena Aronofskija"
-          description="U gradu u Ajdahu, Čarli, povučeni i nezdrav profesor engleskog, krije se u svom stanu i projeda put do smrti."
-        />
-        <ArticleCard
-          isTransparent
-          category="MUZIKA"
-          title="Rammsetein i 'ZEIT' "
-          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque perspiciatis corrupti ducimus? Rerum cupiditate incidunt nesciunt exercitationem consequatur nam quod amet fugit!"
-        />
-        <ArticleCard
-          isTransparent
-          category="UMETNOST"
-          title="Svetska čuda"
-          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque perspiciatis corrupti ducimus? "
-        />
-        <ArticleCard
-          isTransparent
-          title="Lorem ipsum dolor sit amet"
-          category="KNJIŽEVNOST"
-        />
+        {culture?.length > 0 &&
+          culture?.map((article) => (
+            <ArticleCard
+              key={article?.id}
+              isTransparent
+              category={article?.category?.name}
+              title={article?.title}
+              description={article?.excerpt}
+              imgUrl={article?.articleImage?.url}
+            />
+          ))}
       </TopicsFourColumnGrid>
-      <InfoComponent />
-      <TopicsTwoColumnGrid title="ZANIMLJIVOSTI">
-        <Box>
-          <BigArticleCard
-            isTransparent
-            minHeight="400px"
-            category="Istorija"
-            title="Naslov članka istorija"
-            description="Kratak opis teksta. Verovatno ne duže od 100 karaktera."
-          />
-          <Grid
-            gridTemplateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
-            gap="4"
-            mt="2"
-          >
-            <TextArticle
-              title="Nalov prvi"
-              borderBottom="1px"
-              borderRight="1px"
-            />
-            <TextArticle
-              title="Nalov drugi"
-              borderBottom="1px"
-              borderRight="1px"
-            />
-            <TextArticle
-              title="Nalov treći"
-              borderBottom="1px"
-              borderRight="1px"
-            />
-            <TextArticle
-              title="Nalov članka prvi"
-              borderBottom="1px"
-              borderRight="1px"
-            />
-            <TextArticle
-              title="Nalov članka drugi"
-              borderBottom="1px"
-              borderRight="1px"
-            />
-            <TextArticle
-              title="Nalov članka treći"
-              borderBottom="1px"
-              borderRight="1px"
-            />
-          </Grid>
-        </Box>
-        <ArticleCard
-          isTransparent
-          minHeight="400px"
-          title="Neka Zanimljivost"
-          description="Nešto jako zanimljivo. Hmmm, jeste stvarno!"
-        />
-      </TopicsTwoColumnGrid>
+      <InfoComponent article={funFact[0]} />
+      <InterestingFactsSection articles={interestingFacts} />
       <GridSectionWithTitle title="MAGAZIN" columnLg="2">
         <ArticleCard
-          category="Trening snage"
-          title="Neki naslov iz powerlifting teme"
+          category={magazine[1]?.category?.name}
+          title={magazine[1]?.title}
+          imgUrl={magazine[1]?.articleImage?.url}
+          href={`${magazine[1]?.category?.slug}/${magazine[1]?.slug}`}
           largeImage
           minHeight="400px"
         />
         <ArticleCard
-          category="Zdravlje"
-          title="Neki naslov iz zabava teme"
+          category={magazine[0]?.category?.name}
+          title={magazine[0]?.title}
+          imgUrl={magazine[0]?.articleImage?.url}
+          href={`${magazine[0]?.category?.slug}/${magazine[0]?.slug}`}
           largeImage
           minHeight="400px"
         />

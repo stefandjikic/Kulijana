@@ -6,7 +6,6 @@ import { useArticlesContext } from "@/context/ArticlesContext";
 
 const PageSidebar = ({ isReadingPage = false }) => {
   const { featuredArticles } = useArticlesContext();
-  // console.log(featuredArticles, "featuredArticles from sidebar");
   
   return (
     <Box borderTop="2px" py="2" px={{ base: "0", md: "4" }}>

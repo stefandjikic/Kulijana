@@ -9,8 +9,8 @@ const PageLayout = ({ children, isReadingPage = false }) => {
         gridTemplateColumns={{ base: "1fr", md: "0.7fr 0.3fr" }}
         gap={{ base: "4", md: "10", lg: "32" }}
       >
-        <GridItem>{children}</GridItem>
-        <GridItem>
+        <GridItem mt='1'>{children}</GridItem>
+        <GridItem mt={{base: '20px', md: '40px'}}>
           <PageSidebar isReadingPage={isReadingPage} />
         </GridItem>
       </Grid>

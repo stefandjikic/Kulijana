@@ -108,6 +108,18 @@ a {
   line-clamp: 4; 
 }
 
+.article-content h1,
+.article-content h2,
+.article-content h3 {
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.article-content p {
+  margin-bottom: 15px;
+}
+
 @media screen and (max-width: 768px) {
   .nav-item:hover > .nav-item-dropdown {
     display: none;

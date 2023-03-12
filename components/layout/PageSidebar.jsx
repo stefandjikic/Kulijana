@@ -8,10 +8,10 @@ const PageSidebar = ({ isReadingPage = false }) => {
   const { featuredArticles } = useArticlesContext();
   
   return (
-    <Box borderTop="2px" py="2" px={{ base: "0", md: "4" }}>
+    <Box borderTop="4px" py="2" px={{ base: "0", md: "4" }}>
       {isReadingPage && (
         <Box>
-          <Text fontWeight="bold" opacity="0.8">
+          <Text fontWeight="bold" textTransform='uppercase' opacity="0.8">
             Povezani tekstovi
           </Text>
           <HeadlineImageArticleCard
@@ -30,7 +30,7 @@ const PageSidebar = ({ isReadingPage = false }) => {
           />
         </Box>
       )}
-      <Text fontWeight="bold" opacity="0.8">
+      <Text fontWeight="bold" textTransform='uppercase' opacity="0.8">
         Popularni tekstovi
       </Text>
       {featuredArticles?.length > 0 && (

@@ -336,3 +336,48 @@ export const getArticlesByCategory = async (categorySlug) => {
   );
   return edges;
 };
+
+export const getAllSlugs = async () => {
+  const query = `
+  query AllSlugs {
+    articles(last: 1000) {
+      slug
+      category{
+        slug
+      }
+    }
+  }
+  `;
+  const { articles } = await request(graphqlAPI, query);
+  return articles;
+};
+
+export const getArticleDetails = async (slug = "") => {
+  const query = `
+  query ArticleDetails($slug: String!) {
+    article(where: {slug: $slug}) {
+      id
+      articleImage {
+        url
+      }
+      author {
+        name
+        createdAt
+      }
+      category {
+        name
+        slug
+      }
+      excerpt
+      title
+      slug
+      createdAt
+      content {
+        html
+      }
+    }
+  }
+  `;
+  const response = await request(graphqlAPI, query, { slug });
+  return response;
+};

@@ -5,8 +5,10 @@ import Layout from "@/components/layout/Layout";
 import PageLayout from "@/components/layout/PageLayout";
 import { getAllSlugs, getArticleDetails, getRelatedArticles } from "@/graphQL";
 import { formatDate } from "@/utils/helpers";
+import { useRouter } from "next/router";
 
 const SlugInCategory = ({ article, relatedArticles = [] }) => {
+  const router = useRouter()
   // console.log(article, "post");
   // console.log(relatedArticles, 'relatedArticles')
   const {
@@ -16,6 +18,9 @@ const SlugInCategory = ({ article, relatedArticles = [] }) => {
     articleImage: { url: imgUrl = "" } = {},
     content: { html = "" } = {},
   } = { ...article } || {};
+  if (router.isFallback) {
+    return <Box>Loading...</Box>
+  }
   return (
     <Layout>
       <PageLayout isReadingPage relatedArticles={relatedArticles}>
@@ -50,7 +55,7 @@ export async function getStaticPaths() {
   //   },
   // ]
 
-  const paths = slugs?.map((data) => ({
+  const paths = slugs && slugs?.map((data) => ({
     params: {
       category: data.category?.slug,
       slug: data.slug,
@@ -58,7 +63,7 @@ export async function getStaticPaths() {
   }));
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -74,6 +79,6 @@ export async function getStaticProps({ params }) {
       article,
       relatedArticles,
     },
-    // revalidate: 10,
+    revalidate: 1,
   };
 }

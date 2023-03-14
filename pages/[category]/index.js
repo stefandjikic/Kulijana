@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useRouter } from "next/router";
-import { Heading } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import ArticleCard from "@/components/article/ArticleCard";
 import BigArticleCard from "@/components/article/BigArticleCard";
 import Layout from "@/components/layout/Layout";
@@ -18,6 +18,9 @@ const DynamicCategoryPage = ({ articles = [] }) => {
     () => articles.map((article) => article?.node),
     [articles]
   );
+  if (router.isFallback) {
+    return <Box>Loading...</Box>
+  }
 
   return (
     <Layout>
@@ -73,14 +76,14 @@ export default DynamicCategoryPage;
 export async function getStaticPaths() {
   const { categories } = (await getCategoriesBySlug()) || [];
 
-  const paths = await categories?.map((category) => ({
+  const paths = categories && categories?.map((category) => ({
     params: {
       category: category.slug,
     },
   }));
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -92,6 +95,6 @@ export async function getStaticProps({ params }) {
     props: {
       articles,
     },
-    // revalidate: 10,
+    revalidate: 1,
   };
 }

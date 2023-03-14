@@ -74,6 +74,6 @@ export async function getStaticProps({ params }) {
       article,
       relatedArticles,
     },
-    revalidate: 10,
+    // revalidate: 10,
   };
 }

@@ -1,3 +1,4 @@
+import { resolveCategories } from "@/utils/helpers";
 import { request, gql } from "graphql-request";
 
 const graphqlAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT;
@@ -288,22 +289,22 @@ export const getCategoriesBySlug = async () => {
 };
 
 export const getArticlesByCategory = async (categorySlug) => {
-  const resolveCategories = () => {
-    switch (categorySlug) {
-      case "zanimljivosti":
-        return '{OR: [{slug: $categorySlug}, {slug: "istorija"}, {slug: "drustvo"}, {slug: "svet-oko-nas"}]}';
-      case "kultura":
-        return '{OR: [{slug: $categorySlug}, {slug: "film"}, {slug: "muzika"}, {slug: "umetnost"}]}';
-      case "magazin":
-        return '{OR: [{slug: $categorySlug}, {slug: "lifestyle"}, {slug: "trening-kutak"}]}';
-      default:
-        return "{ slug: $categorySlug }";
-    }
-  };
+  // const resolveCategories = () => {
+  //   switch (categorySlug) {
+  //     case "zanimljivosti":
+  //       return '{OR: [{slug: $categorySlug}, {slug: "istorija"}, {slug: "drustvo"}, {slug: "svet-oko-nas"}]}';
+  //     case "kultura":
+  //       return '{OR: [{slug: $categorySlug}, {slug: "film"}, {slug: "muzika"}, {slug: "umetnost"}]}';
+  //     case "magazin":
+  //       return '{OR: [{slug: $categorySlug}, {slug: "lifestyle"}, {slug: "trening-kutak"}]}';
+  //     default:
+  //       return "{ slug: $categorySlug }";
+  //   }
+  // };
 
   const query = gql`
     query ArticlesByCategory($categorySlug: String = "zanimljivosti") {
-      articlesConnection(where: { category: ${resolveCategories()} }, last: 10) {
+      articlesConnection(where: { category: ${resolveCategories(categorySlug)} }, last: 10) {
         edges {
           node {
             id
@@ -379,5 +380,31 @@ export const getArticleDetails = async (slug = "") => {
   }
   `;
   const response = await request(graphqlAPI, query, { slug });
+  return response;
+};
+
+export const getRelatedArticles = async (slug = "", category = "") => {
+  // const resolveCategories = () => {
+  //   switch (category) {
+  //     case "zanimljivosti":
+  //       return '{OR: [{slug: $category}, {slug: "istorija"}, {slug: "drustvo"}, {slug: "svet-oko-nas"}]}';
+  //     case "kultura":
+  //       return '{OR: [{slug: $category}, {slug: "film"}, {slug: "muzika"}, {slug: "umetnost"}]}';
+  //     case "magazin":
+  //       return '{OR: [{slug: $category}, {slug: "lifestyle"}, {slug: "trening-kutak"}]}';
+  //     default:
+  //       return "{ slug: $category }";
+  //   }
+  // };
+  // TODO: resolveCategories. Maybe we can add this resover to helpers.
+  const query = `
+  query RelatedArticles($slug: String!, $category: String!) {
+    articles(where: {slug_not: $slug, AND: {category: ${resolveCategories(category)}}}) {
+      id
+      title
+    }
+  }
+  `;
+  const response = await request(graphqlAPI, query, { slug, category });
   return response;
 };

@@ -3,11 +3,11 @@ import Image from "next/image";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import Layout from "@/components/layout/Layout";
 import PageLayout from "@/components/layout/PageLayout";
-import { getAllSlugs, getArticleDetails } from "@/graphQL";
+import { getAllSlugs, getArticleDetails, getRelatedArticles } from "@/graphQL";
 import { formatDate } from "@/utils/helpers";
 
 const SlugInCategory = ({ article }) => {
-  console.log(article, "post");
+  // console.log(article, "post");
   const {
     title = "",
     excerpt = "",
@@ -40,6 +40,7 @@ export default SlugInCategory;
 
 export async function getStaticPaths() {
   const slugs = (await getAllSlugs()) || [];
+  console.log(slugs, 'slugs')
   // const slugs = [
   //   {
   //     category: {
@@ -55,6 +56,7 @@ export async function getStaticPaths() {
       slug: data.slug,
     },
   }));
+  console.log(paths, 'paths parmas')
   return {
     paths,
     fallback: false,
@@ -62,7 +64,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  // console.log(params, 'params')
   const { article = {} } = await getArticleDetails(params?.slug);
+  // const { articles: relatedArticles = {}} = await getRelatedArticles(params?.slug, params?.category);
+
+  // console.log(relatedArticles, 'relatedArticles')
 
   return {
     props: {

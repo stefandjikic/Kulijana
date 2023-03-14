@@ -23,3 +23,16 @@ export const formatDate = (articleDate = "") => {
   };
   return date.toLocaleDateString("sr-Latn-RS", options);
 };
+
+export const resolveCategories = (categorySlug) => {
+  switch (categorySlug) {
+    case "zanimljivosti":
+      return '{OR: [{slug: $categorySlug}, {slug: "istorija"}, {slug: "drustvo"}, {slug: "svet-oko-nas"}]}';
+    case "kultura":
+      return '{OR: [{slug: $categorySlug}, {slug: "film"}, {slug: "muzika"}, {slug: "umetnost"}]}';
+    case "magazin":
+      return '{OR: [{slug: $categorySlug}, {slug: "lifestyle"}, {slug: "trening-kutak"}]}';
+    default:
+      return "{ slug: $categorySlug }";
+  }
+};

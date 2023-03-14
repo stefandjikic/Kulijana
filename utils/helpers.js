@@ -36,3 +36,28 @@ export const resolveCategories = (categorySlug) => {
       return "{ slug: $categorySlug }";
   }
 };
+
+export const resolveCategoriesForRelatedArticles = (category) => {
+  switch (category) {
+    case "zanimljivosti":
+      return '{OR: [{slug: $category}, {slug: "istorija"}, {slug: "drustvo"}, {slug: "svet-oko-nas"}]}';
+    case "istorija":
+      return '{OR: [{slug: $category}, {slug: "zanimljivosti"}, {slug: "drustvo"}, {slug: "svet-oko-nas"}]}';
+    case "drustvo":
+      return '{OR: [{slug: $category}, {slug: "istorija"}, {slug: "zanimljivosti"}, {slug: "svet-oko-nas"}]}';
+    case "svet-oko-nas":
+      return '{OR: [{slug: $category}, {slug: "istorija"}, {slug: "drustvo"}, {slug: "zanimljivosti"}]}';
+    case "kultura":
+      return '{OR: [{slug: $category}, {slug: "film"}, {slug: "muzika"}, {slug: "umetnost"}]}';
+    case "muzika":
+      return '{OR: [{slug: $category}, {slug: "film"}, {slug: "kultura"}, {slug: "umetnost"}]}';
+    case "film":
+      return '{OR: [{slug: $category}, {slug: "muzika"}, {slug: "kultura"}, {slug: "umetnost"}]}';
+    case "umetnost":
+      return '{OR: [{slug: $category}, {slug: "muzika"}, {slug: "kultura"}, {slug: "film"}]}';
+    case "magazin":
+      return '{OR: [{slug: $category}, {slug: "lifestyle"}, {slug: "trening-kutak"}]}';
+    default:
+      return "{ slug: $category }";
+  }
+};

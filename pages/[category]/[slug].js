@@ -6,8 +6,9 @@ import PageLayout from "@/components/layout/PageLayout";
 import { getAllSlugs, getArticleDetails, getRelatedArticles } from "@/graphQL";
 import { formatDate } from "@/utils/helpers";
 
-const SlugInCategory = ({ article }) => {
+const SlugInCategory = ({ article, relatedArticles = [] }) => {
   // console.log(article, "post");
+  // console.log(relatedArticles, 'relatedArticles')
   const {
     title = "",
     excerpt = "",
@@ -17,7 +18,7 @@ const SlugInCategory = ({ article }) => {
   } = { ...article } || {};
   return (
     <Layout>
-      <PageLayout isReadingPage>
+      <PageLayout isReadingPage relatedArticles={relatedArticles}>
         <Heading mb="6">{title}</Heading>
         <Box my="5" fontSize="xs" opacity="0.5">
           {formatDate(createdAt)}
@@ -27,7 +28,7 @@ const SlugInCategory = ({ article }) => {
           <Image src={imgUrl} alt={title} fill style={{ objectFit: "cover" }} />
         </Box>
         <Box
-          mb='10'
+          mb="10"
           className="article-content"
           dangerouslySetInnerHTML={{ __html: html }}
         ></Box>
@@ -40,7 +41,6 @@ export default SlugInCategory;
 
 export async function getStaticPaths() {
   const slugs = (await getAllSlugs()) || [];
-  console.log(slugs, 'slugs')
   // const slugs = [
   //   {
   //     category: {
@@ -56,7 +56,6 @@ export async function getStaticPaths() {
       slug: data.slug,
     },
   }));
-  console.log(paths, 'paths parmas')
   return {
     paths,
     fallback: false,
@@ -64,15 +63,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  // console.log(params, 'params')
   const { article = {} } = await getArticleDetails(params?.slug);
-  // const { articles: relatedArticles = {}} = await getRelatedArticles(params?.slug, params?.category);
-
-  // console.log(relatedArticles, 'relatedArticles')
+  const { articles: relatedArticles = {} } = await getRelatedArticles(
+    params?.slug,
+    params?.category
+  );
 
   return {
     props: {
       article,
+      relatedArticles,
     },
     revalidate: 10,
   };

@@ -25,12 +25,24 @@ const MainNavigation = () => {
 
   return (
     <Box as="nav" mb="5">
+      <Box
+        position="fixed"
+        top="0"
+        left="0"
+        width="full"
+        textAlign="center"
+        bg="black"
+        color="#fff"
+        zIndex='10'
+      >
+        Sajt je trenutno u izdradi
+      </Box>
       <Container maxW="1200px">
         <Flex justifyContent="space-between" alignItems="center" paddingY="5">
           <Box>
             <HamburgerIcon
               boxSize={6}
-              cursor='pointer'
+              cursor="pointer"
               ref={sideMenuButtonRef}
               onClick={onSideMenuOpen}
             />
@@ -50,7 +62,10 @@ const MainNavigation = () => {
       </Container>
       <Box borderY="1px solid" borderColor={outlineColor}>
         <Container maxW="1200px">
-          <Flex justifyContent={{base: 'flex-start', md: 'center'}} overflowX={{base: 'auto', md: 'unset'}}>
+          <Flex
+            justifyContent={{ base: "flex-start", md: "center" }}
+            overflowX={{ base: "auto", md: "unset" }}
+          >
             {MAIN_NAV.map((nav) => (
               <NavItem key={nav.id} nav={nav} />
             ))}

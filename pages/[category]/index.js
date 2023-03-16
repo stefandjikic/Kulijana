@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Box, Heading } from "@chakra-ui/react";
 import ArticleCard from "@/components/article/ArticleCard";
@@ -8,18 +8,36 @@ import PageLayout from "@/components/layout/PageLayout";
 import GridSectionWithTitle from "@/components/utils/GridSectionWithTitle";
 import { getArticlesByCategory, getCategoriesBySlug } from "@/graphQL";
 import { resolvePageTitle } from "@/utils/helpers";
+import Pagination from "@/components/utils/Pagination";
 
-const DynamicCategoryPage = ({ articles = [] }) => {
-  // console.log(articles, "articles");
+const DynamicCategoryPage = ({ articles = [], pageInfo = {}, count = 0 }) => {
   const router = useRouter();
   const { category } = router.query;
+  const [parsedArticles, setParsedArticles] = useState([]);
+  const [pageInfoDetails, setpageInfoDetails] = useState({});
+  const [skip, setSkip] = useState(0);
 
-  const parsedArticles = useMemo(
-    () => articles.map((article) => article?.node),
-    [articles]
-  );
+  // const parsedArticles = useMemo(
+  //   () => articles.map((article) => article?.node),
+  //   [articles]
+  // );
+
+  useEffect(() => {
+    setParsedArticles(articles.map((article) => article?.node));
+    setpageInfoDetails(pageInfo);
+  }, [articles, pageInfo]);
+
+  const fetchArticles = async (skipArticles) => {
+    setSkip(skipArticles);
+    const res = await getArticlesByCategory(category, skipArticles);
+    setParsedArticles(res?.edges?.map((article) => article?.node));
+    setpageInfoDetails(res?.pageInfo);
+    console.log(res, "res");
+    window.scrollTo(0, 0);
+  };
+
   if (router.isFallback) {
-    return <Box>Loading...</Box>
+    return <Box>Učitavanje...</Box>;
   }
 
   return (
@@ -66,6 +84,12 @@ const DynamicCategoryPage = ({ articles = [] }) => {
             href={`/${item?.category?.slug}/${item?.slug}`}
           />
         ))}
+        <Pagination
+          pageInfoDetails={pageInfoDetails}
+          count={count}
+          skip={skip}
+          fetchArticles={fetchArticles}
+        />
       </PageLayout>
     </Layout>
   );
@@ -76,11 +100,13 @@ export default DynamicCategoryPage;
 export async function getStaticPaths() {
   const { categories } = (await getCategoriesBySlug()) || [];
 
-  const paths = categories && categories?.map((category) => ({
-    params: {
-      category: category.slug,
-    },
-  }));
+  const paths =
+    categories &&
+    categories?.map((category) => ({
+      params: {
+        category: category.slug,
+      },
+    }));
   return {
     paths,
     fallback: true,
@@ -89,11 +115,17 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const slug = params.category;
-  const articles = (await getArticlesByCategory(slug)) || [];
+  const {
+    edges = [],
+    pageInfo = {},
+    aggregate: { count = 0 } = {},
+  } = (await getArticlesByCategory(slug)) || [];
 
   return {
     props: {
-      articles,
+      articles: edges,
+      pageInfo,
+      count,
     },
     revalidate: 1,
   };

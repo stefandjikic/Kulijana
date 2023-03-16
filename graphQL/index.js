@@ -1,3 +1,4 @@
+import { ARTICLES_PER_PAGE } from "@/utils/constants";
 import {
   resolveCategories,
   resolveCategoriesForRelatedArticles,
@@ -291,7 +292,7 @@ export const getCategoriesBySlug = async () => {
   return response;
 };
 
-export const getArticlesByCategory = async (categorySlug) => {
+export const getArticlesByCategory = async (categorySlug, skip) => {
   // const resolveCategories = () => {
   //   switch (categorySlug) {
   //     case "zanimljivosti":
@@ -306,10 +307,10 @@ export const getArticlesByCategory = async (categorySlug) => {
   // };
 
   const query = gql`
-    query ArticlesByCategory($categorySlug: String = "zanimljivosti") {
+    query ArticlesByCategory($categorySlug: String = "zanimljivosti", $skip: Int = 0) {
       articlesConnection(where: { category: ${resolveCategories(
         categorySlug
-      )} }, last: 10) {
+      )} }, first: ${ARTICLES_PER_PAGE}, skip: $skip, orderBy: createdAt_DESC) {
         edges {
           node {
             id
@@ -331,16 +332,24 @@ export const getArticlesByCategory = async (categorySlug) => {
             }
           }
         }
+        pageInfo {
+          pageSize
+          hasPreviousPage
+          hasNextPage
+        }
+        aggregate {
+          count
+        }
       }
     }
   `;
 
-  const { articlesConnection: { edges = [] } = {} } = await request(
+  const { articlesConnection = {} } = await request(
     graphqlAPI,
     query,
-    { categorySlug }
+    { categorySlug, skip }
   );
-  return edges;
+  return articlesConnection;
 };
 
 export const getAllSlugs = async () => {

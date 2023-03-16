@@ -19,7 +19,7 @@ const SlugInCategory = ({ article, relatedArticles = [] }) => {
     content: { html = "" } = {},
   } = { ...article } || {};
   if (router.isFallback) {
-    return <Box>Loading...</Box>
+    return <Box>Učitavanje...</Box>
   }
   return (
     <Layout>

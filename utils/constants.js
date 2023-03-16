@@ -115,3 +115,5 @@ export const MAIN_NAV = [
     subLinks: null,
   },
 ];
+
+export const ARTICLES_PER_PAGE = 10;

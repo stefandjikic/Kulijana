@@ -12,6 +12,7 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import Logo from "./Logo";
 import NavItem from "./NavItem";
 import SideMenu from "./SideMenu";
+import SocialIcons from "../utils/SocialIcons";
 
 const MainNavigation = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -50,7 +51,8 @@ const MainNavigation = () => {
           <Box>
             <Logo />
           </Box>
-          <Box>subscribe</Box>
+          {/* <Box>subscribe</Box> */}
+          <SocialIcons />
         </Flex>
         <SideMenu
           isOpen={isSideMenuOpen}

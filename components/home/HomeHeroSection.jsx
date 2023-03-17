@@ -8,7 +8,7 @@ import SelectedArticlesSection from "./SelectedArticlesSection";
 const HomeHeroSection = ({ heroArticles = [], pickedArticles = [] }) => {
   return (
     <Grid
-      gridTemplateColumns={{ base: "1fr", md: "0.4fr auto 0.2fr" }}
+      gridTemplateColumns={{ base: "1fr", md: "0.4fr auto 0.3fr" }}
       gap="4"
       mt="10"
     >

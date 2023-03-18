@@ -28,6 +28,14 @@ export default function Home({ articles = [] }) {
     interestingFacts = [],
     magazine = [],
   } = { ...articles } || [];
+
+  if (articles?.length === 0) {
+    return (
+      <Layout>
+        <Box textAlign="center">Trenunto nema tekstova. Pokušajte kasnije.</Box>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <HomeHeroSection

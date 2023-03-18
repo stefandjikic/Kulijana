@@ -9,12 +9,12 @@ const TextArticle = ({
   borderRight = "",
   borderTop = "",
   borderLeft = "",
-  borderColor = "blackAlpha.400",
   verticalSpacing = "",
   horizontalSpacing = "",
   href = "/kategorija/article",
 }) => {
   const accentColor = useColorModeValue("#990f3d", "#0d7680");
+  const borderColor = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
   return (
     <Link href={href}>
       <Box

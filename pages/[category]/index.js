@@ -32,65 +32,69 @@ const DynamicCategoryPage = ({ articles = [], pageInfo = {}, count = 0 }) => {
     const res = await getArticlesByCategory(category, skipArticles);
     setParsedArticles(res?.edges?.map((article) => article?.node));
     setpageInfoDetails(res?.pageInfo);
-    console.log(res, "res");
     window.scrollTo(0, 0);
   };
 
   if (router.isFallback) {
-    return <Box>Učitavanje...</Box>;
+    return <Box textAlign="center">Učitavanje...</Box>;
   }
 
   return (
     <Layout>
-      <PageLayout>
-        <Heading mb="10">{resolvePageTitle(category) || ""}</Heading>
-        <BigArticleCard
-          href={`/${parsedArticles[0]?.category?.slug}/${parsedArticles[0]?.slug}`}
-          category={parsedArticles[0]?.category?.name || ""}
-          title={parsedArticles[0]?.title || ""}
-          description={parsedArticles[0]?.excerpt || ""}
-          imgUrl={parsedArticles[0]?.articleImage?.url}
-        />
-        <GridSectionWithTitle gap="6">
-          {parsedArticles[1] && (
-            <ArticleCard
-              href={`/${parsedArticles[1]?.category?.slug}/${parsedArticles[1]?.slug}`}
-              category={parsedArticles[1]?.category?.name || ""}
-              title={parsedArticles[1]?.title || ""}
-              description={parsedArticles[1]?.excerpt || ""}
-              imgUrl={parsedArticles[1]?.articleImage?.url}
-            />
-          )}
-          {parsedArticles[2] && (
-            <ArticleCard
-              href={`/${parsedArticles[2]?.category?.slug}/${parsedArticles[2]?.slug}`}
-              category={parsedArticles[2]?.category?.name || ""}
-              title={parsedArticles[2]?.title || ""}
-              description={parsedArticles[3]?.excerpt || ""}
-              imgUrl={parsedArticles[2]?.articleImage?.url}
-            />
-          )}
-        </GridSectionWithTitle>
-        {parsedArticles?.slice(3)?.map((item) => (
+      {articles?.length === 0 && (
+        <Box textAlign="center">Trenunto nema članaka.</Box>
+      )}
+      {articles && articles?.length > 0 && (
+        <PageLayout>
+          <Heading mb="10">{resolvePageTitle(category) || ""}</Heading>
           <BigArticleCard
-            minHeight="250px"
-            headingSize="xl"
-            verticalSpace="15px"
-            key={item.id}
-            title={item?.title || ""}
-            description={item?.excerpt || ""}
-            imgUrl={item?.articleImage?.url}
-            category={item?.category?.name}
-            href={`/${item?.category?.slug}/${item?.slug}`}
+            href={`/${parsedArticles[0]?.category?.slug}/${parsedArticles[0]?.slug}`}
+            category={parsedArticles[0]?.category?.name || ""}
+            title={parsedArticles[0]?.title || ""}
+            description={parsedArticles[0]?.excerpt || ""}
+            imgUrl={parsedArticles[0]?.articleImage?.url}
           />
-        ))}
-        <Pagination
-          pageInfoDetails={pageInfoDetails}
-          count={count}
-          skip={skip}
-          fetchArticles={fetchArticles}
-        />
-      </PageLayout>
+          <GridSectionWithTitle gap="6">
+            {parsedArticles[1] && (
+              <ArticleCard
+                href={`/${parsedArticles[1]?.category?.slug}/${parsedArticles[1]?.slug}`}
+                category={parsedArticles[1]?.category?.name || ""}
+                title={parsedArticles[1]?.title || ""}
+                description={parsedArticles[1]?.excerpt || ""}
+                imgUrl={parsedArticles[1]?.articleImage?.url}
+              />
+            )}
+            {parsedArticles[2] && (
+              <ArticleCard
+                href={`/${parsedArticles[2]?.category?.slug}/${parsedArticles[2]?.slug}`}
+                category={parsedArticles[2]?.category?.name || ""}
+                title={parsedArticles[2]?.title || ""}
+                description={parsedArticles[3]?.excerpt || ""}
+                imgUrl={parsedArticles[2]?.articleImage?.url}
+              />
+            )}
+          </GridSectionWithTitle>
+          {parsedArticles?.slice(3)?.map((item) => (
+            <BigArticleCard
+              minHeight="250px"
+              headingSize="xl"
+              verticalSpace="15px"
+              key={item.id}
+              title={item?.title || ""}
+              description={item?.excerpt || ""}
+              imgUrl={item?.articleImage?.url}
+              category={item?.category?.name}
+              href={`/${item?.category?.slug}/${item?.slug}`}
+            />
+          ))}
+          <Pagination
+            pageInfoDetails={pageInfoDetails}
+            count={count}
+            skip={skip}
+            fetchArticles={fetchArticles}
+          />
+        </PageLayout>
+      )}
     </Layout>
   );
 };

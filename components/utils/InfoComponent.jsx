@@ -19,7 +19,7 @@ const InfoComponent = ({ article }) => {
     slug = "",
     title = "",
     excerpt = "",
-  } = article;
+  } = { ...article };
   return (
     <Link href={`${categorySlug}/${slug}`}>
       <Flex

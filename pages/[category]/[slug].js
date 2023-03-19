@@ -22,7 +22,7 @@ const SlugInCategory = ({ article, relatedArticles = [] }) => {
     return <Box>Učitavanje...</Box>
   }
   return (
-    <Layout>
+    <Layout title={`${title} | Kulijana`} description={excerpt}>
       <PageLayout isReadingPage relatedArticles={relatedArticles}>
         <Heading mb="6">{title}</Heading>
         <Box my="5" fontSize="xs" opacity="0.5">

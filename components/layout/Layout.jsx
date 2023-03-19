@@ -4,7 +4,7 @@ import { Container } from "@chakra-ui/react";
 import MainNavigation from "./MainNavigation";
 import Footer from "./Footer";
 
-const Layout = ({ children, title = "" }) => {
+const Layout = ({ children, title = "", description = "" }) => {
   return (
     <>
       <Head>
@@ -13,10 +13,16 @@ const Layout = ({ children, title = "" }) => {
           name="description"
           content="Kulijana - Portal posvećen informisanju, zabavi i temama iz svakodnevnog života"
         />
-        <meta name="og:title" content={title || "Kulijana - Portal o svakodnevnim temama"} />
+        <meta
+          name="og:title"
+          content={title || "Kulijana - Portal o svakodnevnim temama"}
+        />
         <meta
           name="og:description"
-          content="Kulijana - Portal posvećen informisanju, zabavi i temama iz svakodnevnog života"
+          content={
+            description ||
+            "Kulijana - Portal posvećen informisanju, zabavi i temama iz svakodnevnog života"
+          }
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

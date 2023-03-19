@@ -40,7 +40,12 @@ const DynamicCategoryPage = ({ articles = [], pageInfo = {}, count = 0 }) => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title={`${resolvePageTitle(category)} | Kulijana`}
+      description={`${resolvePageTitle(
+        category
+      )} - Kulijana - Portal posvećen informisanju, zabavi i temama iz svakodnevnog života`}
+    >
       {articles?.length === 0 && (
         <Box textAlign="center">Trenunto nema članaka.</Box>
       )}

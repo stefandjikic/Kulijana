@@ -11,6 +11,7 @@ import {
   Flex,
   Switch,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import Logo from "./Logo";
@@ -18,6 +19,7 @@ import { MAIN_NAV } from "@/utils/constants";
 import Link from "next/link";
 import SocialIcons from "../utils/SocialIcons";
 import { useRouter } from "next/router";
+import SubscribeModal from "../subscribe/SubscribeModal";
 
 const SideMenu = ({ isOpen, onClose, toggleColorMode, colorMode }) => {
   const router = useRouter();
@@ -27,6 +29,12 @@ const SideMenu = ({ isOpen, onClose, toggleColorMode, colorMode }) => {
   const borderColor = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
   const buttonColorScheme = useColorModeValue("blackAlpha", "gray");
   const accentColor = useColorModeValue("#990f3d", "#0d7680");
+
+  const {
+    isOpen: isSubscribeModalOpen,
+    onOpen: onSubscribeModalOpen,
+    onClose: onSubscribeClose,
+  } = useDisclosure();
 
   const closeMenu = () => {
     setTimeout(() => {
@@ -53,7 +61,12 @@ const SideMenu = ({ isOpen, onClose, toggleColorMode, colorMode }) => {
               isChecked={colorMode === "dark" ? true : false}
             />
           </Flex>
-          <Button mt="4" w="full" colorScheme={buttonColorScheme}>
+          <Button
+            mt="4"
+            w="full"
+            onClick={onSubscribeModalOpen}
+            colorScheme={buttonColorScheme}
+          >
             Newsletter
           </Button>
           <Box mt="8">
@@ -106,6 +119,11 @@ const SideMenu = ({ isOpen, onClose, toggleColorMode, colorMode }) => {
           <SocialIcons />
         </DrawerFooter>
       </DrawerContent>
+      <SubscribeModal
+        isOpen={isSubscribeModalOpen}
+        onOpen={onSubscribeModalOpen}
+        onClose={onSubscribeClose}
+      />
     </Drawer>
   );
 };

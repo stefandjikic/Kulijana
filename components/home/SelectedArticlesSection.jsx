@@ -16,6 +16,7 @@ const SelectedArticlesSection = ({ pickedArticles = [] }) => {
       />
       <TextArticle
         title={pickedArticles[0]?.title}
+        href={`${pickedArticles[0]?.category?.slug}/${pickedArticles[0]?.slug}`}
         borderTop="1px"
       />
     </Box>

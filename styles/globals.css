@@ -119,6 +119,12 @@ a {
 
 .article-content p {
   margin-bottom: 15px;
+  font-size: 17px;
+}
+
+.article-content li {
+  margin-bottom: 15px;
+  margin-left: 20px;
 }
 
 @media screen and (max-width: 768px) {

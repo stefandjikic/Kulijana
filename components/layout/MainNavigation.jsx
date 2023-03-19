@@ -26,7 +26,7 @@ const MainNavigation = () => {
 
   return (
     <Box as="nav" mb="5">
-      <Box
+      {/* <Box
         position="fixed"
         top="0"
         left="0"
@@ -37,7 +37,7 @@ const MainNavigation = () => {
         zIndex='10'
       >
         Sajt je trenutno u izdradi
-      </Box>
+      </Box> */}
       <Container maxW="1200px">
         <Flex justifyContent="space-between" alignItems="center" paddingY="5">
           <Box>

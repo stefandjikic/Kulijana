@@ -172,7 +172,8 @@ export const getHomePageArticles = async () => {
         createdAt
       }
       interestingFacts: articles(
-        last: 8
+        first: 8
+        orderBy: createdAt_DESC
         where: {
           OR: [
             { category: { slug: "zanimljivosti" } }
@@ -344,11 +345,10 @@ export const getArticlesByCategory = async (categorySlug, skip) => {
     }
   `;
 
-  const { articlesConnection = {} } = await request(
-    graphqlAPI,
-    query,
-    { categorySlug, skip }
-  );
+  const { articlesConnection = {} } = await request(graphqlAPI, query, {
+    categorySlug,
+    skip,
+  });
   return articlesConnection;
 };
 

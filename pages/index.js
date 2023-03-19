@@ -7,8 +7,7 @@ import BigArticleCard from "@/components/article/BigArticleCard";
 import ArticleCard from "@/components/article/ArticleCard";
 import TopicsFourColumnGrid from "@/components/home/TopicsFourColumnGrid";
 import InfoComponent from "@/components/utils/InfoComponent";
-import { Box, Grid, Heading } from "@chakra-ui/react";
-import TextArticle from "@/components/article/TextArticle";
+import { Box } from "@chakra-ui/react";
 import GridSectionWithTitle from "@/components/utils/GridSectionWithTitle";
 import { getHomePageArticles } from "@/graphQL";
 import InterestingFactsSection from "@/components/home/InterestingFactsSection";
@@ -72,6 +71,7 @@ export default function Home({ articles = [] }) {
             title={itArticle?.title}
             description={itArticle?.excerpt}
             imgUrl={itArticle?.articleImage?.url}
+            href={`${itArticle?.category?.slug}/${itArticle?.slug}`}
           />
         ))}
       </TopicsFourColumnGrid>
@@ -103,6 +103,7 @@ export default function Home({ articles = [] }) {
               title={article?.title}
               description={article?.excerpt}
               imgUrl={article?.articleImage?.url}
+              href={`${article?.category?.slug}/${article?.slug}`}
             />
           ))}
       </TopicsFourColumnGrid>

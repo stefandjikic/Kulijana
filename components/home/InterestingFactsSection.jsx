@@ -12,11 +12,11 @@ const InterestingFactsSection = ({ articles = [] }) => {
         <BigArticleCard
           isTransparent
           minHeight="400px"
-          category={articles[7]?.category?.name}
-          title={articles[7]?.title}
-          description={articles[7]?.excerpt}
-          imgUrl={articles[7]?.articleImage?.url}
-          href={`${articles[7]?.category?.slug}/${articles[7]?.slug}`}
+          category={articles[0]?.category?.name}
+          title={articles[0]?.title}
+          description={articles[0]?.excerpt}
+          imgUrl={articles[0]?.articleImage?.url}
+          href={`${articles[0]?.category?.slug}/${articles[0]?.slug}`}
         />
         <Grid
           gridTemplateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
@@ -25,7 +25,7 @@ const InterestingFactsSection = ({ articles = [] }) => {
         >
           {articles?.length > 0 &&
             articles
-              ?.slice(0, 6)
+              ?.slice(2, articles?.length)
               ?.map((article) => (
                 <TextArticle
                   key={article?.id}
@@ -40,11 +40,11 @@ const InterestingFactsSection = ({ articles = [] }) => {
       <ArticleCard
         isTransparent
         minHeight="400px"
-        category={articles[6]?.category?.name}
-        title={articles[6]?.title}
-        description={articles[6]?.excerpt}
-        imgUrl={articles[6]?.articleImage?.url}
-        href={`${articles[6]?.category?.slug}/${articles[6]?.slug}`}
+        category={articles[1]?.category?.name}
+        title={articles[1]?.title}
+        description={articles[1]?.excerpt}
+        imgUrl={articles[1]?.articleImage?.url}
+        href={`${articles[1]?.category?.slug}/${articles[1]?.slug}`}
       />
     </TopicsTwoColumnGrid>
   );

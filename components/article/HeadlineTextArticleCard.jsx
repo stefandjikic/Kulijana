@@ -41,7 +41,7 @@ const HeadlineTextArticleCard = ({
           >
             {title}
           </Heading>
-          <Text>{description || ""}</Text>
+          <Text className="limit-description">{description || ""}</Text>
           <Box color={accentColor} fontSize="xs" mt="4">
             {formatDate(date) || ""}
           </Box>

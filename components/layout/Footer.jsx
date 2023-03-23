@@ -17,17 +17,21 @@ const Footer = () => {
   return (
     <Box bg={footerBg} color="whiteAlpha.700">
       <Container maxW="1280px">
-        <Grid gridTemplateColumns="repeat(2, auto)" pt="10" pb="8">
-          <Box textAlign="center">
+        <Grid
+          gridTemplateColumns={{ base: "1fr", md: "repeat(2, auto)" }}
+          pt="10"
+          pb="8"
+        >
+          <Box textAlign="center" mb={{base: '8', md: "0"}}>
             <Logo subheading />
             <Flex justifyContent="center" my="4">
               <SocialIcons light />
             </Flex>
           </Box>
           <Grid
-            gridTemplateColumns="repeat(3, 1fr)"
+            gridTemplateColumns={{base: "1fr)", md: "repeat(3, 1fr)"}}
             gridColumnGap="50px"
-            textAlign="left"
+            textAlign={{base: "center", md: "left"}}
           >
             {MAIN_NAV.filter((mn) => mn.id !== 1).map((navItem) => (
               <Box key={navItem?.id} mb="4">
